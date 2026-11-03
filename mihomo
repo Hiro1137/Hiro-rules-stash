@@ -1,6 +1,33 @@
 
 [YAML]
 
+# ==========================================
+# DNS：国内 App 使用 Real-IP
+# 其他域名仍使用 Fake-IP
+# ==========================================
+
+dns:
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter+:
+    # Bilibili
+    - "+.bilibili.com"
+    - "+.biliapi.net"
+    - "+.bilivideo.com"
+    - "+.biliimg.com"
+    - "+.bilicdn1.com"
+
+    # Taobao / Tmall
+    - "+.taobao.com"
+    - "+.tmall.com"
+    - "+.alicdn.com"
+    - "+.tbcdn.cn"
+    - "+.taobaocdn.com"
+
+
+# ==========================================
+# 代理策略组
+# ==========================================
+
 proxy-groups!:
   - name: "🚀 默认代理"
     type: select
@@ -113,13 +140,10 @@ proxy-groups!:
       - "🚀 默认代理"
       - "DIRECT"
 
-  # WebRTC 防护
-  - name: "🛡️ WebRTC防护"
-    type: select
-    proxies:
-      - "REJECT-DROP"
-      - "🚀 默认代理"
-      - "DIRECT"
+
+# ==========================================
+# 规则提供者
+# ==========================================
 
 rule-providers!:
   private_domain:
@@ -386,6 +410,11 @@ rule-providers!:
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs"
     path: ./rule_provider/apple_ip.mrs
 
+
+# ==========================================
+# 分流规则
+# ==========================================
+
 rules!:
   # 自定义直连
   - DOMAIN-SUFFIX,download.nvidia.com,DIRECT
@@ -393,27 +422,6 @@ rules!:
   - DOMAIN-SUFFIX,prod.dl.playstation.net,DIRECT
   - GEOSITE,steam@cn,DIRECT
   - DOMAIN-SUFFIX,steamserver.net,DIRECT
-
-  # WebRTC：Zoom / Discord 域名例外
-  - DOMAIN-SUFFIX,zoom.us,DIRECT
-  - DOMAIN-SUFFIX,zoom.com,DIRECT
-  - DOMAIN-SUFFIX,discord.com,🚀 默认代理
-  - DOMAIN-SUFFIX,discord.gg,🚀 默认代理
-
-  # WebRTC：STUN / TURN 常见端口拦截
-  - DST-PORT,3478,🛡️ WebRTC防护
-  - DST-PORT,5349,🛡️ WebRTC防护
-  - DST-PORT,19302,🛡️ WebRTC防护
-  - DST-PORT,19303,🛡️ WebRTC防护
-  - DST-PORT,19304,🛡️ WebRTC防护
-  - DST-PORT,19305,🛡️ WebRTC防护
-  - DST-PORT,19306,🛡️ WebRTC防护
-  - DST-PORT,19307,🛡️ WebRTC防护
-  - DST-PORT,19308,🛡️ WebRTC防护
-  - DST-PORT,19309,🛡️ WebRTC防护
-
-  # WebRTC：STUN 域名匹配
-  - DOMAIN-KEYWORD,stun,🛡️ WebRTC防护
 
   # Google
   - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🍀 Google
