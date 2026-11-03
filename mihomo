@@ -15,6 +15,7 @@ dns:
     - "+.bilivideo.com"
     - "+.biliimg.com"
     - "+.bilicdn1.com"
+    - "+.hdslb.com"
 
     # Taobao / Tmall
     - "+.taobao.com"
