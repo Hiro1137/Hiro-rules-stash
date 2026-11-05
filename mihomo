@@ -425,7 +425,7 @@ rule-providers!:
 
 rules!:
 
-  #屏蔽B站MCDN
+  # 屏蔽B站MCDN
   - DOMAIN-SUFFIX,mcdn.bilivideo.cn,REJECT
   - DOMAIN-SUFFIX,mcdn.bilivideo.com,REJECT
   
