@@ -424,6 +424,11 @@ rule-providers!:
 # ==========================================
 
 rules!:
+
+  #屏蔽B站MCDN
+  - DOMAIN-SUFFIX,mcdn.bilivideo.cn,REJECT
+  - DOMAIN-SUFFIX,mcdn.bilivideo.com,REJECT
+  
   # 自定义直连
   - DOMAIN-SUFFIX,download.nvidia.com,DIRECT
   - DOMAIN-SUFFIX,update.playstation.net,DIRECT
