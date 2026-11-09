@@ -442,9 +442,9 @@ rules!:
   - DOMAIN-SUFFIX,u3d.cn,REJECT
 
   # ===== Unity 国际版走代理 =====
-  - DOMAIN,download.unity3d.com,国外网站
-  - DOMAIN-SUFFIX,unity3d.com,国外网站
-  - DOMAIN-SUFFIX,unity.com,国外网站
+  - DOMAIN,download.unity3d.com,🚀 默认代理
+  - DOMAIN-SUFFIX,unity3d.com,🚀 默认代理
+  - DOMAIN-SUFFIX,unity.com,🚀 默认代理
 
   # Google
   - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🍀 Google
