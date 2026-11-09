@@ -444,12 +444,15 @@ rules!:
   - GEOSITE,steam@cn,DIRECT
   - DOMAIN-SUFFIX,steamserver.net,DIRECT
 
-  # ===== 屏蔽 Unity 中国 / 团结引擎 =====
-  - DOMAIN-SUFFIX,unitychina.cn,REJECT
-  - DOMAIN-SUFFIX,unity.cn,REJECT
-  - DOMAIN-SUFFIX,u3d.cn,REJECT
+  # ===== Unity 中国镜像：只拦截编辑器下载 =====
+  - DOMAIN,download.unitychina.cn,REJECT
 
-  # ===== Unity Hub / Editor：独立美国节点 =====
+  # ===== Unity 中国服务：允许正常连接 =====
+  - DOMAIN-SUFFIX,unitychina.cn,DIRECT
+  - DOMAIN-SUFFIX,unity.cn,DIRECT
+  - DOMAIN-SUFFIX,u3d.cn,DIRECT
+
+  # ===== Unity 国际版：专用美国代理 =====
   - DOMAIN,download.unity3d.com,🎮 Unity
   - DOMAIN,beta.unity3d.com,🎮 Unity
   - DOMAIN-SUFFIX,unity3d.com,🎮 Unity
