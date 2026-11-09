@@ -43,6 +43,14 @@ proxy-groups!:
     proxies:
       - "DIRECT"
 
+  # Unity Hub / Editor 专用：仅纳入名称包含美国/US 标识的节点
+  - name: "🎮 Unity"
+    type: select
+    include-all: true
+    proxies:
+      - "🚀 默认代理"
+      - "DIRECT"
+
   - name: "📹 YouTube"
     type: select
     include-all: true
@@ -441,10 +449,11 @@ rules!:
   - DOMAIN-SUFFIX,unity.cn,REJECT
   - DOMAIN-SUFFIX,u3d.cn,REJECT
 
-  # ===== Unity 国际版走代理 =====
-  - DOMAIN,download.unity3d.com,🚀 默认代理
-  - DOMAIN-SUFFIX,unity3d.com,🚀 默认代理
-  - DOMAIN-SUFFIX,unity.com,🚀 默认代理
+  # ===== Unity Hub / Editor：独立美国节点 =====
+  - DOMAIN,download.unity3d.com,🎮 Unity
+  - DOMAIN,beta.unity3d.com,🎮 Unity
+  - DOMAIN-SUFFIX,unity3d.com,🎮 Unity
+  - DOMAIN-SUFFIX,unity.com,🎮 Unity
 
   # Google
   - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🍀 Google
