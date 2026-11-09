@@ -43,14 +43,6 @@ proxy-groups!:
     proxies:
       - "DIRECT"
 
-  # Unity Hub / Editor 专用：仅纳入名称包含美国/US 标识的节点
-  - name: "🎮 Unity"
-    type: select
-    include-all: true
-    proxies:
-      - "🚀 默认代理"
-      - "DIRECT"
-
   - name: "📹 YouTube"
     type: select
     include-all: true
@@ -136,6 +128,14 @@ proxy-groups!:
       - "DIRECT"
 
   - name: "💵 PayPal"
+    type: select
+    include-all: true
+    proxies:
+      - "🚀 默认代理"
+      - "DIRECT"
+
+  # Unity Hub / Editor
+  - name: "🎮 Unity"
     type: select
     include-all: true
     proxies:
