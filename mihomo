@@ -436,6 +436,16 @@ rules!:
   - GEOSITE,steam@cn,DIRECT
   - DOMAIN-SUFFIX,steamserver.net,DIRECT
 
+  # ===== 屏蔽 Unity 中国 / 团结引擎 =====
+  - DOMAIN-SUFFIX,unitychina.cn,REJECT
+  - DOMAIN-SUFFIX,unity.cn,REJECT
+  - DOMAIN-SUFFIX,u3d.cn,REJECT
+
+  # ===== Unity 国际版走代理 =====
+  - DOMAIN,download.unity3d.com,国外网站
+  - DOMAIN-SUFFIX,unity3d.com,国外网站
+  - DOMAIN-SUFFIX,unity.com,国外网站
+
   # Google
   - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,🍀 Google
   - DOMAIN-SUFFIX,googleapis.cn,🍀 Google
