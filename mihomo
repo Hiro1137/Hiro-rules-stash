@@ -1,14 +1,13 @@
-
-[YAML]
+name: Mihomo 分流规则转换版
+desc: 各分类直接提供 DIRECT 与独立全节点选择器，避免 include-all 忽略显式选项。
+# 使用 Stash 覆写语法；需搭配包含代理节点的主配置文件。
+# 注意：proxy-groups、rule-providers、rules 使用 #!replace，会替换主配置原有项。
 
 # ==========================================
-# DNS：国内 App 使用 Real-IP
-# 其他域名仍使用 Fake-IP
+# DNS：国内 App 使用 Real-IP，其余沿用 Fake-IP
 # ==========================================
-
 dns:
-  fake-ip-filter-mode: blacklist
-  fake-ip-filter+:
+  fake-ip-filter: #!append
     # Bilibili
     - "+.bilibili.com"
     - "+.biliapi.net"
@@ -35,135 +34,194 @@ dns:
 # ==========================================
 # 代理策略组
 # ==========================================
-
-proxy-groups!:
+proxy-groups: #!replace
+  # 默认代理可选择全部订阅节点
   - name: "🚀 默认代理"
     type: select
     include-all: true
-    proxies:
-      - "DIRECT"
+
+  - name: "🔀 📹 YouTube 节点"
+    type: select
+    include-all: true
 
   - name: "📹 YouTube"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 📹 YouTube 节点"
+
+  - name: "🔀 🍀 Google 节点"
+    type: select
+    include-all: true
 
   - name: "🍀 Google"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 🍀 Google 节点"
+
+  - name: "🔀 🤖 AI 节点"
+    type: select
+    include-all: true
 
   - name: "🤖 AI"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 🤖 AI 节点"
+
+  - name: "🔀 👨🏿‍💻 GitHub 节点"
+    type: select
+    include-all: true
 
   - name: "👨🏿‍💻 GitHub"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 👨🏿‍💻 GitHub 节点"
+
+  - name: "🔀 🐬 OneDrive 节点"
+    type: select
+    include-all: true
 
   - name: "🐬 OneDrive"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 🐬 OneDrive 节点"
+
+  - name: "🔀 🪟 Microsoft 节点"
+    type: select
+    include-all: true
 
   - name: "🪟 Microsoft"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 🪟 Microsoft 节点"
+
+  - name: "🔀 🎵 TikTok 节点"
+    type: select
+    include-all: true
 
   - name: "🎵 TikTok"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 🎵 TikTok 节点"
+
+  - name: "🔀 📱 Telegram 节点"
+    type: select
+    include-all: true
 
   - name: "📱 Telegram"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 📱 Telegram 节点"
+
+  - name: "🔀 🎥 NETFLIX 节点"
+    type: select
+    include-all: true
 
   - name: "🎥 NETFLIX"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 🎥 NETFLIX 节点"
+
+  - name: "🔀 ✨ Disney 节点"
+    type: select
+    include-all: true
 
   - name: "✨ Disney"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 ✨ Disney 节点"
+
+  - name: "🔀 📺 HBO 节点"
+    type: select
+    include-all: true
 
   - name: "📺 HBO"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 📺 HBO 节点"
+
+  - name: "🔀 🎧 Spotify 节点"
+    type: select
+    include-all: true
 
   - name: "🎧 Spotify"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 🎧 Spotify 节点"
+
+  - name: "🔀 💵 PayPal 节点"
+    type: select
+    include-all: true
 
   - name: "💵 PayPal"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 💵 PayPal 节点"
 
   # Unity Hub / Editor
-  - name: "🎮 Unity"
+  - name: "🔀 🎮 Unity 节点"
     type: select
     include-all: true
+
+  - name: "🎮 Unity"
+    type: select
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 🎮 Unity 节点"
+
+  - name: "🔀 🌍 国外网站 节点"
+    type: select
+    include-all: true
 
   - name: "🌍 国外网站"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
+      - DIRECT
+      - "🔀 🌍 国外网站 节点"
+
+  - name: "🔀 🐟 漏网之鱼 节点"
+    type: select
+    include-all: true
 
   - name: "🐟 漏网之鱼"
     type: select
-    include-all: true
     proxies:
       - "🚀 默认代理"
-      - "DIRECT"
-
+      - DIRECT
+      - "🔀 🐟 漏网之鱼 节点"
 
 # ==========================================
 # 规则提供者
 # ==========================================
-
-rule-providers!:
+rule-providers: #!replace
   private_domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -171,7 +229,6 @@ rule-providers!:
     path: ./rule_provider/private_domain.mrs
 
   proxylite:
-    type: http
     interval: 86400
     behavior: classical
     format: text
@@ -179,7 +236,6 @@ rule-providers!:
     path: ./rule_provider/proxylite.list
 
   ChatGPT_Domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -187,7 +243,6 @@ rule-providers!:
     path: ./rule_provider/openai.mrs
 
   Claude_Domain:
-    type: http
     interval: 86400
     behavior: classical
     format: text
@@ -195,7 +250,6 @@ rule-providers!:
     path: ./rule_provider/Claude.list
 
   Meta_AI_Domain:
-    type: http
     interval: 86400
     behavior: classical
     format: text
@@ -203,7 +257,6 @@ rule-providers!:
     path: ./rule_provider/MetaAi.list
 
   Perplexity_Domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -211,7 +264,6 @@ rule-providers!:
     path: ./rule_provider/perplexity.mrs
 
   Copilot_Domain:
-    type: http
     interval: 86400
     behavior: classical
     format: text
@@ -219,7 +271,6 @@ rule-providers!:
     path: ./rule_provider/Copilot.list
 
   Gemini_Domain:
-    type: http
     interval: 86400
     behavior: classical
     format: text
@@ -227,7 +278,6 @@ rule-providers!:
     path: ./rule_provider/Gemini.list
 
   ai:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -235,7 +285,6 @@ rule-providers!:
     path: ./rule_provider/category-ai.mrs
 
   youtube_domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -243,7 +292,6 @@ rule-providers!:
     path: ./rule_provider/youtube.mrs
 
   google_domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -251,7 +299,6 @@ rule-providers!:
     path: ./rule_provider/google.mrs
 
   github_domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -259,7 +306,6 @@ rule-providers!:
     path: ./rule_provider/github.mrs
 
   telegram_domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -267,7 +313,6 @@ rule-providers!:
     path: ./rule_provider/telegram.mrs
 
   netflix_domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -275,7 +320,6 @@ rule-providers!:
     path: ./rule_provider/netflix.mrs
 
   Disney_Domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -283,7 +327,6 @@ rule-providers!:
     path: ./rule_provider/disney.mrs
 
   HBO_Domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -291,7 +334,6 @@ rule-providers!:
     path: ./rule_provider/hbo.mrs
 
   Spotify_Domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -299,7 +341,6 @@ rule-providers!:
     path: ./rule_provider/spotify.mrs
 
   paypal_domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -307,7 +348,6 @@ rule-providers!:
     path: ./rule_provider/paypal.mrs
 
   onedrive_domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -315,7 +355,6 @@ rule-providers!:
     path: ./rule_provider/onedrive.mrs
 
   microsoft_domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -323,23 +362,13 @@ rule-providers!:
     path: ./rule_provider/microsoft.mrs
 
   apple_domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs"
     path: ./rule_provider/apple.mrs
 
-  speedtest_domain:
-    type: http
-    interval: 86400
-    behavior: domain
-    format: mrs
-    url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"
-    path: ./rule_provider/speedtest.mrs
-
   tiktok_domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -347,7 +376,6 @@ rule-providers!:
     path: ./rule_provider/tiktok.mrs
 
   Globe_Domain:
-    type: http
     interval: 86400
     behavior: classical
     format: text
@@ -355,7 +383,6 @@ rule-providers!:
     path: ./rule_provider/Global.list
 
   GateFireWall_Domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -363,7 +390,6 @@ rule-providers!:
     path: ./rule_provider/gfw.mrs
 
   geolocation-!cn:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -371,7 +397,6 @@ rule-providers!:
     path: ./rule_provider/geolocation-!cn.mrs
 
   cn_domain:
-    type: http
     interval: 86400
     behavior: domain
     format: mrs
@@ -379,7 +404,6 @@ rule-providers!:
     path: ./rule_provider/cn.mrs
 
   private_ip:
-    type: http
     interval: 86400
     behavior: ipcidr
     format: mrs
@@ -387,7 +411,6 @@ rule-providers!:
     path: ./rule_provider/private_ip.mrs
 
   cn_ip:
-    type: http
     interval: 86400
     behavior: ipcidr
     format: mrs
@@ -395,7 +418,6 @@ rule-providers!:
     path: ./rule_provider/cn_ip.mrs
 
   google_ip:
-    type: http
     interval: 86400
     behavior: ipcidr
     format: mrs
@@ -403,7 +425,6 @@ rule-providers!:
     path: ./rule_provider/google_ip.mrs
 
   telegram_ip:
-    type: http
     interval: 86400
     behavior: ipcidr
     format: mrs
@@ -411,7 +432,6 @@ rule-providers!:
     path: ./rule_provider/telegram_ip.mrs
 
   netflix_ip:
-    type: http
     interval: 86400
     behavior: ipcidr
     format: mrs
@@ -419,24 +439,20 @@ rule-providers!:
     path: ./rule_provider/netflix_ip.mrs
 
   apple_ip:
-    type: http
     interval: 86400
     behavior: ipcidr
     format: mrs
     url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs"
     path: ./rule_provider/apple_ip.mrs
 
-
 # ==========================================
 # 分流规则
 # ==========================================
-
-rules!:
-
-  # 屏蔽B站MCDN
+rules: #!replace
+  # 屏蔽 B 站 MCDN
   - DOMAIN-SUFFIX,mcdn.bilivideo.cn,REJECT
   - DOMAIN-SUFFIX,mcdn.bilivideo.com,REJECT
-  
+
   # 自定义直连
   - DOMAIN-SUFFIX,download.nvidia.com,DIRECT
   - DOMAIN-SUFFIX,update.playstation.net,DIRECT
@@ -452,7 +468,7 @@ rules!:
   - DOMAIN-SUFFIX,unity.cn,DIRECT
   - DOMAIN-SUFFIX,u3d.cn,DIRECT
 
-  # ===== Unity 国际版：专用美国代理 =====
+  # ===== Unity 国际版：专用代理 =====
   - DOMAIN,download.unity3d.com,🎮 Unity
   - DOMAIN,beta.unity3d.com,🎮 Unity
   - DOMAIN-SUFFIX,unity3d.com,🎮 Unity
@@ -472,13 +488,13 @@ rules!:
   - "DOMAIN-SUFFIX,yyg.ink,🚀 默认代理"
   - "RULE-SET,proxylite,🚀 默认代理"
 
-  # AI
+  # AI（Copilot 置于通用 AI 规则前，避免被截胡）
+  - "RULE-SET,Copilot_Domain,🪟 Microsoft"
   - "RULE-SET,ai,🤖 AI"
   - "RULE-SET,ChatGPT_Domain,🤖 AI"
   - "RULE-SET,Claude_Domain,🤖 AI"
   - "RULE-SET,Meta_AI_Domain,🤖 AI"
   - "RULE-SET,Perplexity_Domain,🤖 AI"
-  - "RULE-SET,Copilot_Domain,🪟 Microsoft"
   - "RULE-SET,Gemini_Domain,🤖 AI"
 
   # 服务分流
@@ -496,17 +512,17 @@ rules!:
   - "RULE-SET,netflix_domain,🎥 NETFLIX"
   - "RULE-SET,paypal_domain,💵 PayPal"
 
-  # IP 分流
-  - "RULE-SET,apple_ip,DIRECT"
-  - "RULE-SET,google_ip,🍀 Google"
-  - "RULE-SET,netflix_ip,🎥 NETFLIX"
-  - "RULE-SET,telegram_ip,📱 Telegram"
-
-  # 全球及国内规则
+  # 全球及国内域名规则
   - "RULE-SET,Globe_Domain,🌍 国外网站"
   - "RULE-SET,GateFireWall_Domain,🌍 国外网站"
   - "RULE-SET,geolocation-!cn,🚀 默认代理"
   - "RULE-SET,cn_domain,DIRECT"
+
+  # IP 分流（置于域名规则之后，避免提前触发本地 DNS 解析）
+  - "RULE-SET,apple_ip,DIRECT,no-resolve"
+  - "RULE-SET,google_ip,🍀 Google,no-resolve"
+  - "RULE-SET,netflix_ip,🎥 NETFLIX,no-resolve"
+  - "RULE-SET,telegram_ip,📱 Telegram,no-resolve"
   - "RULE-SET,cn_ip,DIRECT"
 
   # 兜底
